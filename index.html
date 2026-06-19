@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Donghyun Jeong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@200;300;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --font: "Albert Sans", system-ui, sans-serif;
+    --w-light: 200;   /* ExtraLight — nav, meta, secondary text */
+    --w-body: 300;    /* Light — body copy */
+    --w-med: 500;     /* Medium — headings, emphasis */
+    --white: #ffffff;
+    --soft: rgba(255,255,255,.72);
+    --dim: rgba(255,255,255,.5);
+    --hair: rgba(255,255,255,.22);
+    --accent: #ffffff;
+    --glass: rgba(255,255,255,.07);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font);
+    font-weight:var(--w-body);
+    color:var(--white);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* user-designed blue grain background */
+  .bg{
+    position:fixed; inset:0; z-index:-2;
+    background:#1f3a8a url("assets/desktop.png") center/cover no-repeat;
+  }
+  .bg::after{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(120% 100% at 50% 40%, rgba(8,14,40,0) 45%, rgba(8,14,40,.42) 100%);
+  }
+  @media (max-width:768px){
+    .bg{ background-image:url("assets/mobile.png"); }
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  em{ font-style:normal; font-weight:var(--w-med); color:var(--white); }
+  strong{ font-weight:var(--w-med); color:var(--white); }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:20;
+    display:flex; justify-content:center; gap:46px;
+    padding:26px 0;
+    transition:background .4s, padding .4s;
+  }
+  nav.scrolled{
+    background:rgba(15,25,60,.45);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    padding:18px 0;
+  }
+  nav a{
+    font-weight:var(--w-med); font-size:17px; letter-spacing:.07em;
+    text-transform:lowercase; color:var(--soft);
+    position:relative; padding-bottom:3px;
+    transition:color .3s;
+  }
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--white); transition:width .3s;
+  }
+  nav a:hover{ color:var(--white); }
+  nav a:hover::after{ width:100%; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:120px 24px 80px;
+  }
+  .venn{ position:relative; width:min(88vw,540px); aspect-ratio:46/42; margin-bottom:50px; }
+  .venn svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+  .venn circle{
+    fill:rgba(255,255,255,.04);
+    stroke:rgba(255,255,255,.6); stroke-width:1.2;
+    transform-origin:center;
+  }
+  .c-ai{ animation:float1 9s ease-in-out infinite; }
+  .c-comm{ animation:float2 11s ease-in-out infinite; }
+  .c-start{ animation:float3 10s ease-in-out infinite; }
+  @keyframes float1{ 0%,100%{ transform:translateY(-2px); } 50%{ transform:translateY(4px); } }
+  @keyframes float2{ 0%,100%{ transform:translate(2px,2px); } 50%{ transform:translate(-3px,-3px); } }
+  @keyframes float3{ 0%,100%{ transform:translate(-2px,2px); } 50%{ transform:translate(3px,-3px); } }
+  .venn .lab{
+    position:absolute; transform:translate(-50%,-50%);
+    font-weight:var(--w-light); font-size:clamp(15px,2.4vw,20px); letter-spacing:.02em;
+    pointer-events:none;
+  }
+  .lab-ai{ left:50%; top:21%; }
+  .lab-comm{ left:26%; top:70%; }
+  .lab-start{ left:74%; top:70%; }
+
+  .hero h1{
+    font-weight:var(--w-med);
+    font-size:clamp(12px,3.3vw,25px); line-height:1.3; letter-spacing:-.005em;
+    white-space:nowrap;
+  }
+  .hero .name{
+    margin-top:30px; font-weight:var(--w-light);
+    font-size:clamp(13px,1.6vw,16px); letter-spacing:.42em; text-transform:uppercase;
+    color:var(--soft);
+  }
+  .scroll-cue{
+    margin-top:54px; font-weight:var(--w-light); font-size:12px; letter-spacing:.24em;
+    color:var(--dim); display:inline-flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue .arr{ animation:bob 1.8s ease-in-out infinite; }
+  @keyframes bob{ 0%,100%{ transform:translateY(0); opacity:.5; } 50%{ transform:translateY(5px); opacity:1; } }
+
+  /* ---------- SECTIONS ---------- */
+  .section{ max-width:1040px; margin:0 auto; padding:120px 28px; }
+  .eyebrow{
+    font-weight:var(--w-med); font-size:clamp(23px,2.9vw,31px); letter-spacing:.005em;
+    color:var(--white); margin-bottom:40px;
+    display:flex; align-items:center; gap:20px;
+  }
+  .eyebrow::after{ content:""; flex:1; height:1px; background:var(--hair); }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:54px; align-items:start; }
+  .photo{
+    width:100%; border-radius:18px; overflow:hidden;
+    border:1px solid var(--hair); background:rgba(255,255,255,.05);
+    aspect-ratio:1156/1286;
+  }
+  .photo img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(100%) contrast(1.02); }
+  .about-text p{ font-weight:var(--w-body); font-size:clamp(16px,1.8vw,19px); color:var(--soft); margin-bottom:22px; }
+  .about-text .accent{ color:var(--accent); font-weight:var(--w-med); }
+  .socials{ display:flex; gap:18px; margin-top:34px; }
+  .socials a{
+    width:42px; height:42px; display:grid; place-items:center;
+    border:1px solid var(--hair); border-radius:50%; color:var(--soft);
+    transition:border-color .3s, color .3s, transform .3s, background .3s;
+  }
+  .socials a:hover{ color:#0f1a3c; background:var(--white); border-color:var(--white); transform:translateY(-3px); }
+  .socials svg{ width:18px; height:18px; }
+
+  /* CAREER */
+  .timeline{ position:relative; padding-left:28px; }
+  .timeline::before{ content:""; position:absolute; left:5px; top:8px; bottom:8px; width:1px; background:var(--hair); }
+  .job{ position:relative; padding-bottom:46px; }
+  .job:last-child{ padding-bottom:0; }
+  .job::before{
+    content:""; position:absolute; left:-27px; top:7px; width:11px; height:11px; border-radius:50%;
+    background:var(--white); box-shadow:0 0 0 4px rgba(255,255,255,.12);
+  }
+  .job .role{ font-weight:var(--w-med); font-size:clamp(18px,2.4vw,22px); }
+  .job .org{ font-weight:var(--w-body); color:var(--soft); margin-top:2px; }
+  .job .meta{ font-weight:var(--w-light); font-size:13px; letter-spacing:.04em; color:var(--dim); margin:8px 0 14px; }
+  .job ul{ list-style:none; display:grid; gap:9px; }
+  .job li{ font-weight:var(--w-body); color:var(--soft); font-size:15.5px; padding-left:18px; position:relative; line-height:1.65; }
+  .job li::before{ content:""; position:absolute; left:0; top:11px; width:5px; height:5px; border-radius:50%; background:var(--accent); }
+  .edu{ margin-top:50px; padding-top:30px; border-top:1px solid var(--hair); }
+  .edu .role{ font-weight:var(--w-med); font-size:18px; }
+  .edu .meta{ font-weight:var(--w-light); color:var(--dim); font-size:14px; margin-top:4px; }
+
+  /* PROJECTS */
+  .proj-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  .proj{
+    background:var(--glass); border:1px solid var(--hair); border-radius:16px;
+    padding:30px 30px 32px; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    display:flex; flex-direction:column;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, background .35s;
+  }
+  .proj:hover{ transform:translateY(-6px); border-color:rgba(255,255,255,.5); background:rgba(255,255,255,.12); }
+  .proj .top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+  .badge{
+    font-weight:var(--w-med); font-size:11px; letter-spacing:.06em;
+    color:#0f1a3c; background:var(--accent); border-radius:999px; padding:4px 10px;
+  }
+  .proj h3{ font-weight:var(--w-med); font-size:clamp(18px,2.2vw,21px); line-height:1.3; }
+  .proj .when{ font-weight:var(--w-light); font-size:13px; letter-spacing:.04em; color:var(--dim); margin:6px 0 14px; }
+  .proj p{ font-weight:var(--w-body); font-size:15px; color:var(--soft); line-height:1.66; margin-bottom:16px; }
+  .proj .tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; }
+  .proj .tag{
+    font-weight:var(--w-light); font-size:11.5px; letter-spacing:.04em; color:var(--soft);
+    border:1px solid var(--hair); border-radius:6px; padding:4px 9px;
+  }
+  .proj .repo{ font-weight:var(--w-light); font-size:13px; color:var(--accent); margin-top:14px; letter-spacing:.02em; }
+  .proj .repo:hover{ text-decoration:underline; }
+
+  footer{ text-align:center; padding:60px 24px 70px; }
+  footer p{ font-weight:var(--w-light); font-size:12.5px; letter-spacing:.16em; color:var(--dim); text-transform:uppercase; }
+
+  /* reveal */
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (max-width:768px){
+    nav{ gap:30px; }
+    .about-grid{ grid-template-columns:1fr; gap:34px; }
+    .photo{ max-width:340px; }
+    .proj-grid{ grid-template-columns:1fr; }
+    .section{ padding:90px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<nav id="nav">
+  <a href="#about">about</a>
+  <a href="#career">career</a>
+  <a href="#projects">projects</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="venn">
+    <svg viewBox="0 0 460 420" aria-hidden="true">
+      <circle class="c-ai"    cx="230" cy="150" r="120" />
+      <circle class="c-comm"  cx="160" cy="270" r="120" />
+      <circle class="c-start" cx="300" cy="270" r="120" />
+    </svg>
+    <span class="lab lab-ai">AI</span>
+    <span class="lab lab-comm">Community</span>
+    <span class="lab lab-start">Startup</span>
+  </div>
+
+  <h1>I explore how AI reshapes business and the way we think.</h1>
+  <p class="name">Donghyun Jeong</p>
+
+  <span class="scroll-cue">SCROLL <span class="arr">↓</span></span>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="section">
+  <p class="eyebrow reveal">About</p>
+  <div class="about-grid">
+    <div class="photo reveal">
+      <img src="assets/profile-image.png" alt="Portrait of Donghyun Jeong" />
+    </div>
+    <div class="about-text">
+      <p class="reveal"><span class="accent">Donghyun Jeong</span> is a builder and researcher exploring how AI reshapes business and the way we think. He works across three domains — <em>AI, community, and startups</em> — turning emerging technology into products people can actually use.</p>
+      <p class="reveal">He is the <strong>co-founder of D.ONE</strong> and a Computer Science &amp; Fashion Industry student at Incheon National University. His work spans self-supervised representation learning for RGB–thermal imagery, diffusion-based virtual try-on, and speech-separation systems for accessibility — leading teams from problem to MVP, conducting 50+ user interviews, and earning recognition across multiple national AI and startup competitions.</p>
+      <p class="reveal">He cares most about technology that reaches underserved communities — from individuals with hearing loss to early-stage social ventures — and about the messy, human work of taking an idea from a whiteboard to something real.</p>
+      <div class="socials reveal">
+        <a href="mailto:jdh9490@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a href="https://github.com/jdh4601" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 5 18 5.3 18 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/donghyun10/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.4h-3.6v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.4H3.5V9h3.6v11.4ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6C0 23.2.8 24 1.8 24h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg>
+        </a>
+        <a href="https://hynfinity.substack.com/" target="_blank" rel="noopener" aria-label="Substack">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAREER ============ -->
+<section id="career" class="section">
+  <p class="eyebrow reveal">Career</p>
+  <div class="timeline">
+    <div class="job reveal">
+      <div class="role">Co-Founder</div>
+      <div class="org">D.ONE · Full-time</div>
+      <div class="meta">Oct 2025 – Present · Songdo International Business District, Incheon</div>
+    </div>
+    <div class="job reveal">
+      <div class="role">Undergraduate Researcher</div>
+      <div class="org">Incheon National University · Part-time</div>
+      <div class="meta">Mar 2025 – Oct 2025 · Incheon, South Korea</div>
+      <ul>
+        <li>Researched self-supervised cross-modal representation learning for RGB–thermal (IR) imagery.</li>
+        <li>Built a contrastive pretraining pipeline (MoCo v2, dual RGB–IR encoders), reaching <strong>57% cross-modal top-1 retrieval</strong> on aligned FLIR data.</li>
+        <li>Transferred the MoCo-pretrained ResNet-50 backbone into GM-DETR (a DETR-based detector) via staged fine-tuning.</li>
+      </ul>
+    </div>
+    <div class="job reveal">
+      <div class="role">Co-Founder &amp; Product Lead</div>
+      <div class="org">Sound Bartender · Part-time</div>
+      <div class="meta">Mar 2025 – Aug 2025 · Incheon, South Korea</div>
+      <ul>
+        <li>Owned end-to-end product strategy across hardware, AI, and Android, leading a team to MVP.</li>
+        <li>Conducted <strong>50+ user interviews</strong> and secured MOUs with 3 welfare institutions for early validation.</li>
+        <li>Delivered an MVP with <strong>+7.01 dB SNR</strong> improvement; recognized in 4 startup competitions, including a Social Venture Contest prize.</li>
+      </ul>
+    </div>
+    <div class="job reveal">
+      <div class="role">College Fellowship</div>
+      <div class="org">Hyundai Motor Chung Mong-Koo Foundation · Part-time</div>
+      <div class="meta">Jul 2022 – Oct 2022 · Seoul, South Korea</div>
+      <ul>
+        <li>Researched ESG and climate-tech trends for equitable access to stock-market information.</li>
+        <li>Applied Naver CLOVA AI to design a public-disclosure intelligence service for retail investors.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="edu reveal">
+    <div class="role">Incheon National University</div>
+    <div class="meta">B.S., Computer Science &amp; Fashion Industry · Mar 2022 – Dec 2027</div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="section">
+  <p class="eyebrow reveal">Projects</p>
+  <div class="proj-grid">
+
+    <article class="proj reveal">
+      <div class="top"><span class="badge">2nd place</span></div>
+      <h3>AI Interview Coach</h3>
+      <div class="when">GDGoC Hackathon · Feb 2026</div>
+      <p>An AI mock-interview simulator focused on delivery over content — audio-only questions, 120s constrained responses, and structured feedback on pacing and narrative flow. Whisper STT with GPT-4o for question generation and report synthesis.</p>
+      <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">GPT-4o</span><span class="tag">Whisper</span></div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="top"><span class="badge">3rd place</span></div>
+      <h3>Chakboot — AI Virtual Fitting</h3>
+      <div class="when">Jun 2025 – Jul 2025</div>
+      <p>A real-time diffusion-based virtual try-on MVP for offline retail under GPU and latency limits. Benchmarked VITON-HD / StableVITON / MV-VTON and selected CatVTON (8GB VRAM, ~10s) with a QR → avatar → inference → render pipeline.</p>
+      <div class="tags"><span class="tag">React 19</span><span class="tag">Vite</span><span class="tag">Zustand</span><span class="tag">CatVTON</span></div>
+    </article>
+
+    <article class="proj reveal">
+      <div class="top"><span class="badge">1st place · $5,000</span></div>
+      <h3>AI Hearing Aid</h3>
+      <div class="when">Apr 2025 – Jun 2025 · Sound Bartender</div>
+      <p>An accessibility-focused system using speech separation to isolate and enhance target voices in noisy environments for individuals with hearing loss, built on public datasets.</p>
+      <div class="tags"><span class="tag">Speech Separation</span><span class="tag">Accessibility</span></div>
+    </article>
+
+    <article class="proj reveal">
+      <h3>CUDA GPU Optimization</h3>
+      <div class="when">Sep 2025 – Oct 2025</div>
+      <p>Kernel profiling and memory-optimization exercises (coalescing, shared memory), analyzing how thread/block configurations affect throughput and latency, compiled into reusable notes.</p>
+      <div class="tags"><span class="tag">CUDA</span><span class="tag">GPU</span><span class="tag">Profiling</span></div>
+      <a class="repo" href="https://github.com/jdh4601/CUDA_programming" target="_blank" rel="noopener">github.com/jdh4601/CUDA_programming ↗</a>
+    </article>
+
+    <article class="proj reveal">
+      <h3>Hana Social Venture University</h3>
+      <div class="when">Jul 2025 – Sep 2025 · Sound Bartender</div>
+      <p>Selected for a nationwide social-venture track partnered with 30+ universities; refined the business model through an execution-focused bootcamp and 1:1 venture coaching.</p>
+      <div class="tags"><span class="tag">Business Model</span><span class="tag">Social Impact</span></div>
+    </article>
+
+    <article class="proj reveal">
+      <h3>V2V Electricity Sharing Platform</h3>
+      <div class="when">Hyundai Mobis × Likelion · Dec 2022 – Feb 2023</div>
+      <p>A prototype letting EV users locate and share electricity with nearby vehicles in real time — map-based proximity matching, a responsive sharing-request flow, and optimized server-state with React Query.</p>
+      <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">React Query</span><span class="tag">Map API</span></div>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Donghyun Jeong</p>
+</footer>
+
+<script>
+(function(){
+  // nav background on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // scroll reveals
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
