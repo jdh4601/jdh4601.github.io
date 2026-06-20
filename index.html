@@ -262,15 +262,6 @@
     .intro-venn{ width:min(74vw,380px); }
     .hero h1{ font-size:clamp(23px,6vw,31px); white-space:normal; }
   }
-  @media (prefers-reduced-motion: reduce){
-    *{ animation:none !important; transition:none !important; }
-    html{ scroll-behavior:auto; }
-    .reveal{ opacity:1; transform:none; }
-    .intro{ display:none; }
-    body.intro-active nav,
-    body.intro-active .hero{ opacity:1; }
-    .hero h1 .pen-circle path{ stroke-dashoffset:0 !important; }
-  }
 </style>
 </head>
 <body class="intro-active">
@@ -446,8 +437,7 @@
 (function(){
   // intro sequence: draw circles (2s) -> glide them into the hero's resting spot
   const intro = document.getElementById('intro');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (intro && !reduce){
+  if (intro){
     const introVenn = intro.querySelector('.intro-venn');
     const heroVenn = document.getElementById('heroVenn');
     const MOVE_MS = 1000;
@@ -494,21 +484,16 @@
   const timeline = document.querySelector('.timeline');
   if (timeline){
     const jobs = Array.from(timeline.querySelectorAll('.job'));
-    if (reduce){
-      timeline.style.setProperty('--fill', timeline.offsetHeight + 'px');
-      jobs.forEach(job => job.classList.add('line-active'));
-    } else {
-      const updateLine = () => {
-        const rect = timeline.getBoundingClientRect();
-        const marker = window.innerHeight * 0.55;       // fill reaches down to this line in the viewport
-        const fill = Math.max(0, Math.min(marker - rect.top, timeline.offsetHeight));
-        timeline.style.setProperty('--fill', fill + 'px');
-        jobs.forEach(job => job.classList.toggle('line-active', fill >= job.offsetTop + 12));
-      };
-      window.addEventListener('scroll', updateLine, { passive:true });
-      window.addEventListener('resize', updateLine);
-      updateLine();
-    }
+    const updateLine = () => {
+      const rect = timeline.getBoundingClientRect();
+      const marker = window.innerHeight * 0.55;       // fill reaches down to this line in the viewport
+      const fill = Math.max(0, Math.min(marker - rect.top, timeline.offsetHeight));
+      timeline.style.setProperty('--fill', fill + 'px');
+      jobs.forEach(job => job.classList.toggle('line-active', fill >= job.offsetTop + 12));
+    };
+    window.addEventListener('scroll', updateLine, { passive:true });
+    window.addEventListener('resize', updateLine);
+    updateLine();
   }
 })();
 </script>
