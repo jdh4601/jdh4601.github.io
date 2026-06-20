@@ -87,12 +87,12 @@
     stroke:rgba(255,255,255,.6); stroke-width:1.2;
     transform-origin:center;
   }
-  .c-ai{ animation:float1 9s ease-in-out infinite; }
-  .c-comm{ animation:float2 11s ease-in-out infinite; }
-  .c-start{ animation:float3 10s ease-in-out infinite; }
-  @keyframes float1{ 0%,100%{ transform:translateY(-2px); } 50%{ transform:translateY(4px); } }
-  @keyframes float2{ 0%,100%{ transform:translate(2px,2px); } 50%{ transform:translate(-3px,-3px); } }
-  @keyframes float3{ 0%,100%{ transform:translate(-2px,2px); } 50%{ transform:translate(3px,-3px); } }
+  .c-ai{ animation:float1 9s ease-in-out 3.3s infinite; }
+  .c-comm{ animation:float2 11s ease-in-out 3.3s infinite; }
+  .c-start{ animation:float3 10s ease-in-out 3.3s infinite; }
+  @keyframes float1{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(5px); } }
+  @keyframes float2{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(-4px,-4px); } }
+  @keyframes float3{ 0%,100%{ transform:translate(0,0); } 50%{ transform:translate(4px,-3px); } }
   .venn .lab{
     position:absolute; transform:translate(-50%,-50%);
     font-weight:var(--w-light); font-size:clamp(15px,2.4vw,20px); letter-spacing:.02em;
@@ -109,16 +109,21 @@
     white-space:nowrap;
   }
   .hero h1 .ital{ font-style:italic; }
-  /* highlighter-pen paint stroke */
-  .hero h1 .hl{
-    background-image:linear-gradient(104deg, rgba(255,196,87,.55) 0%, rgba(255,178,68,.62) 100%);
-    background-repeat:no-repeat;
-    background-position:0 .78em;
-    background-size:0% .52em;
-    padding:0 .04em; border-radius:2px;
-    animation:paint 1s cubic-bezier(.65,0,.35,1) 3.6s forwards;
+  /* hand-drawn pen circle around the phrase */
+  .hero h1 .circle-wrap{ position:relative; display:inline-block; white-space:nowrap; }
+  .hero h1 .pen-circle{
+    position:absolute; left:50%; top:50%;
+    transform:translate(-50%,-52%) rotate(-2deg);
+    width:108%; height:166%; overflow:visible; pointer-events:none;
   }
-  @keyframes paint{ to{ background-size:100% .52em; } }
+  .hero h1 .pen-circle path{
+    fill:none; stroke:#8fc4ff; stroke-width:2.4;
+    stroke-linecap:round; stroke-linejoin:round;
+    vector-effect:non-scaling-stroke;
+    stroke-dasharray:1; stroke-dashoffset:1;
+    animation:penCircle 1s cubic-bezier(.45,.05,.25,1) 3.6s forwards;
+  }
+  @keyframes penCircle{ to{ stroke-dashoffset:0; } }
   .hero .name{
     margin-top:30px; font-weight:var(--w-light);
     font-size:clamp(13px,1.6vw,16px); letter-spacing:.42em; text-transform:uppercase;
@@ -144,7 +149,7 @@
   }
   .intro-venn circle{
     fill:rgba(255,255,255,0);
-    stroke:rgba(255,255,255,.72); stroke-width:1.2;
+    stroke:rgba(255,255,255,.6); stroke-width:1.2;
     stroke-dasharray:760; stroke-dashoffset:760;
     animation:introDraw 2s ease forwards, introFill .8s ease 1.5s forwards;
   }
@@ -154,7 +159,6 @@
   /* hide landing content until the intro circles settle into place */
   nav{ transition:opacity .9s ease; }
   .hero{ transition:opacity 1s ease; }
-  .hero .venn{ transition:opacity .35s ease; }
   body.intro-active nav,
   body.intro-active .hero{ opacity:0; }
   body.intro-moving .hero .venn{ opacity:0; }
@@ -265,7 +269,7 @@
     .intro{ display:none; }
     body.intro-active nav,
     body.intro-active .hero{ opacity:1; }
-    .hero h1 .hl{ background-size:100% .52em !important; }
+    .hero h1 .pen-circle path{ stroke-dashoffset:0 !important; }
   }
 </style>
 </head>
@@ -300,7 +304,7 @@
     <span class="lab lab-start">Startup</span>
   </div>
 
-  <h1>I explore how AI reshapes business<br />and <span class="ital"><span class="hl">the way we think</span>.</span></h1>
+  <h1>I explore how AI reshapes business<br />and <span class="ital"><span class="circle-wrap">the way we think<svg class="pen-circle" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M 150 14 C 222 14, 282 30, 282 50 C 282 70, 222 86, 150 86 C 78 86, 18 70, 18 50 C 18 31, 78 14, 150 14" /></svg></span>.</span></h1>
   <p class="name">Donghyun Jeong</p>
 
   <span class="scroll-cue">SCROLL <span class="arr">↓</span></span>
@@ -459,9 +463,16 @@
       introVenn.style.transition = 'transform ' + MOVE_MS + 'ms cubic-bezier(.4,0,.2,1)';
       introVenn.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')';
     }, 2000);
-    // hand off to the real venn once aligned, then drop the overlay
-    setTimeout(() => document.body.classList.remove('intro-moving'), 2000 + MOVE_MS);
-    setTimeout(() => intro.remove(), 2000 + MOVE_MS + 400);
+    // once the glide finishes, swap to the real venn in the same frame -> no flicker
+    let handedOff = false;
+    const handoff = () => {
+      if (handedOff) return;
+      handedOff = true;
+      document.body.classList.remove('intro-moving');
+      intro.remove();
+    };
+    introVenn.addEventListener('transitionend', handoff, { once:true });
+    setTimeout(handoff, 2000 + MOVE_MS + 150); // fallback if transitionend doesn't fire
   } else {
     document.body.classList.remove('intro-active');
     if (intro) intro.remove();
