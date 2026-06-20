@@ -1,1 +1,5 @@
 .DS_Store
+
+# heavy image sources (compressed .webp versions are committed instead)
+assets/*.png
+!assets/url-icon.png
