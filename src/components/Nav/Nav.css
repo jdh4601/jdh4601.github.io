@@ -1,0 +1,61 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  gap: clamp(18px, 3vw, 40px);
+  padding: 22px 0;
+}
+
+/* No bar, just a paper-coloured fade so the links stay legible over content. */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: 72px;
+  background: linear-gradient(var(--paper) 45%, rgba(242, 238, 228, 0));
+  pointer-events: none;
+}
+
+.nav__link {
+  position: relative;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  transition: color 0.3s var(--ease);
+  white-space: nowrap;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  border-bottom: 1px dashed var(--thread);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.nav__link:hover {
+  color: var(--ink);
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 480px) {
+  .nav {
+    gap: 16px;
+    padding: 16px 0;
+  }
+  .nav__link {
+    font-size: 12px;
+  }
+}

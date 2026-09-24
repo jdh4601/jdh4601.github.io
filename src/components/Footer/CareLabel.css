@@ -1,0 +1,67 @@
+/* A woven care label, sewn on with a running stitch. */
+.care-label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px 36px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 22px 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background-color: #fffefb;
+  background-image: repeating-linear-gradient(90deg, rgba(28, 27, 24, 0.018) 0 1px, transparent 1px 3px);
+  outline: 1px dashed rgba(28, 27, 24, 0.35);
+  outline-offset: -8px;
+  box-shadow:
+    0 0 0 1px rgba(28, 27, 24, 0.06),
+    0 16px 30px -20px rgba(40, 32, 20, 0.35);
+  transform: rotate(-0.6deg);
+}
+
+.care-label__brand {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.care-label__lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  list-style: none;
+}
+
+.care-label__lines li + li::before {
+  content: '·';
+  margin-right: 22px;
+  margin-left: -22px;
+  position: relative;
+  left: 11px;
+  opacity: 0.5;
+}
+
+.care-label__size {
+  opacity: 0.55;
+}
+
+@media (max-width: 640px) {
+  .care-label {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 24px;
+  }
+  .care-label__lines {
+    flex-direction: column;
+  }
+  .care-label__lines li + li::before {
+    content: none;
+  }
+}

@@ -1,0 +1,27 @@
+.thread {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.thread__reveal {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 10;
+}
+
+.thread__stitch {
+  fill: none;
+  stroke: var(--thread);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 9 6;
+}
+
+.thread__tip {
+  fill: var(--thread);
+  transition: opacity 0.3s;
+}

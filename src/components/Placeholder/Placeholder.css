@@ -1,0 +1,38 @@
+.placeholder {
+  position: relative;
+  width: 100%;
+  background-color: var(--paper-deep);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 9px,
+    rgba(28, 27, 24, 0.06) 9px 10px
+  );
+  outline: 1px dashed rgba(28, 27, 24, 0.22);
+  outline-offset: -8px;
+  overflow: hidden;
+}
+
+.placeholder--filled {
+  object-fit: cover;
+  outline: 0;
+}
+
+.placeholder__label,
+.placeholder__ratio {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.placeholder__label {
+  left: 16px;
+  bottom: 14px;
+}
+
+.placeholder__ratio {
+  right: 16px;
+  top: 14px;
+}
+
