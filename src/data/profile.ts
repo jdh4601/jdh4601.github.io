@@ -2,7 +2,7 @@ export type BioPart = string | { text: string; href: string }
 
 export const PROFILE = {
   name: 'Donghyun Jeong',
-  tagline: 'I make patterns. Some are cut from fabric, some are trained from data.',
+  tagline: 'Some of my work is cut from fabric, some is trained from data.',
   descriptor: 'Fashion x AI / based in Seoul',
   email: 'donghyun.jeong.main@gmail.com',
   photo: '/img/profile.webp',
