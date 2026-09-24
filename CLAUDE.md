@@ -27,5 +27,5 @@ Vite + React + TypeScript, deployed to GitHub Pages by `.github/workflows/deploy
 ## Replacing placeholders
 - Media slots render `Placeholder` until a `src` is set in the data file. Look photos live in `public/img/looks/`, archive photos in `public/archive/` (WebP, 720px wide, `width`/`height` set in `archive.ts`).
 - Landing polaroids hold lookbook photos (`public/objects/sl-*.webp`); the caption is the item `label` in `board.ts`.
-- Collections use one 4:5 photo per Look (no video, no Mac chrome), always on the left, including on phones.
+- Collections use one 3:2 photo per Look (no video, no Mac chrome) on the left, tilted and taped at two corners. Photos are hidden at ≤800px on purpose.
 - Board icons render at the same pixel size on every screen; phones only change positions (`mobile`) and hide `hideOnMobile` items.
