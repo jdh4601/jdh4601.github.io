@@ -32,7 +32,7 @@ export const ARCHIVE_ITEMS: readonly ArchiveItem[] = [
   { id: 'project-2', tag: 'fashion', caption: "Project 02, back view.", date: '2026-04', ratio: '4/5', src: '/archive/project-2.webp', width: 720, height: 1080 },
   { id: 'drawing', tag: 'fashion', caption: "Front and back, sketched first.", date: '2026-04', ratio: '4/5', src: '/archive/drawing.webp', width: 720, height: 932 },
   { id: 'lab-1', tag: 'intelligence', caption: "Agents on one screen, code on the other.", date: '2026-03', ratio: '4/5', src: '/archive/lab-1.webp', width: 720, height: 960 },
-  { id: 'runway-2', tag: 'fashion', caption: "IGNITION, a graduation fashion show.", date: '2026-03', ratio: '4/5', src: '/archive/runway-2.webp', width: 720, height: 960 },
+  { id: 'runway-2', tag: 'fashion', caption: "Visiting IGNITION, a graduation fashion show.", date: '2026-03', ratio: '4/5', src: '/archive/runway-2.webp', width: 720, height: 960 },
   { id: 'venn', tag: 'startup', caption: "Fun, market need, profit. Look for the overlap.", date: '2026-02', ratio: '4/5', src: '/archive/venn.webp', width: 520, height: 406 },
   { id: 'claude-stickers', tag: 'intelligence', caption: "Clauding\u2026", date: '2026-02', ratio: '4/5', src: '/archive/claude-stickers.webp', width: 720, height: 845 },
   { id: 'google-stickers', tag: 'intelligence', caption: "GDGoC hackathon, Team 11.", date: '2026-02', ratio: '4/5', src: '/archive/google-stickers.webp', width: 720, height: 960 },
