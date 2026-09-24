@@ -12,9 +12,69 @@
   align-items: center;
 }
 
+/* Pinned to the sample-room wall: each look hangs a little off-true, taped at two corners. */
 .look__photo {
+  --tilt: -1.2deg;
+  --tape-a-tilt: -38deg;
+  --tape-b-tilt: 34deg;
+  position: relative;
   max-width: 440px;
   box-shadow: 0 18px 36px -24px rgba(40, 32, 20, 0.45);
+  transform: rotate(var(--tilt));
+}
+
+.look:nth-child(4n + 2) .look__photo {
+  --tilt: 0.9deg;
+  --tape-a-tilt: -44deg;
+  --tape-b-tilt: 40deg;
+}
+
+.look:nth-child(4n + 3) .look__photo {
+  --tilt: -0.5deg;
+  --tape-a-tilt: -32deg;
+  --tape-b-tilt: 47deg;
+}
+
+.look:nth-child(4n + 4) .look__photo {
+  --tilt: 1.5deg;
+  --tape-a-tilt: -48deg;
+  --tape-b-tilt: 36deg;
+}
+
+.look__photo::before,
+.look__photo::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  width: 92px;
+  height: 26px;
+  background: rgba(233, 226, 206, 0.82);
+  box-shadow: 0 1px 2px rgba(40, 32, 20, 0.12);
+  /* Torn ends, as if ripped off the roll by hand. */
+  clip-path: polygon(
+    0 8%, 4% 0, 96% 4%, 100% 0, 97% 30%, 100% 55%, 96% 80%, 100% 100%,
+    3% 96%, 0 100%, 3% 70%, 0 45%, 4% 22%
+  );
+  pointer-events: none;
+}
+
+.look__photo::before {
+  top: -4px;
+  left: -30px;
+  transform: rotate(var(--tape-a-tilt));
+}
+
+.look__photo::after {
+  top: -4px;
+  right: -30px;
+  transform: rotate(var(--tape-b-tilt));
+}
+
+/* Every other look is taped on the diagonal instead of across the top. */
+.look:nth-child(even) .look__photo::after {
+  top: auto;
+  bottom: -4px;
+  transform: rotate(calc(var(--tape-b-tilt) * -1));
 }
 
 .look__meta {
