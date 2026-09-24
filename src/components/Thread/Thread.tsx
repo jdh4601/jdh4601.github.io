@@ -32,7 +32,6 @@ export function Thread() {
     if (!d || !reveal || !tip) return
 
     const total = reveal.getTotalLength()
-    const prefersStatic = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     reveal.style.strokeDasharray = `${total}`
     let frame = 0
 
@@ -40,7 +39,7 @@ export function Thread() {
       const target = window.scrollY + window.innerHeight * VIEWPORT_ANCHOR
       const isAtBottom =
         window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
-      const length = prefersStatic || isAtBottom ? total : lengthAtY(reveal, total, target)
+      const length = isAtBottom ? total : lengthAtY(reveal, total, target)
       reveal.style.strokeDashoffset = `${total - length}`
       const point = reveal.getPointAtLength(length)
       tip.setAttribute('cx', `${point.x}`)
