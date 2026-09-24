@@ -66,6 +66,19 @@
   color: var(--ink);
 }
 
+.look__link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border-bottom: 1px dashed var(--thread);
+  transition: color 0.2s;
+}
+
+.look__link:hover {
+  color: var(--thread);
+}
+
 @media (max-width: 800px) {
   .collections__list {
     gap: 0;

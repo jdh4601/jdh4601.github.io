@@ -8,6 +8,7 @@ export interface Look {
   line: string
   composition: string
   photo: { file: string; ratio: Ratio; src?: string }
+  link?: { label: string; href: string }
 }
 
 export const LOOKS: readonly Look[] = [
@@ -37,6 +38,10 @@ export const LOOKS: readonly Look[] = [
     line: 'Scan a QR, pick an avatar, try the garment on in ten seconds. Diffusion-based fitting, shipped in three days for a campus festival.',
     composition: '70% diffusion, 20% festival crowd, 10% sleepless nights',
     photo: { file: 'virtual-fitting.webp', ratio: '3/2', src: '/img/looks/virtual-fitting.webp' },
+    link: {
+      label: 'Presentation deck',
+      href: 'https://drive.google.com/file/d/1NL2UQL1CtTqmu9Aa4tZ6k_m_L2iWd-wS/view?usp=sharing',
+    },
   },
   {
     number: '04',

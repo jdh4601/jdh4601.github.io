@@ -59,4 +59,5 @@ export const ARCHIVE_ITEMS: readonly ArchiveItem[] = [
   { id: 'unithon-demo', tag: 'startup', caption: "Presenting on UNITHON demo day.", date: '2025-06', ratio: '4/5', src: '/archive/unithon-demo.webp', width: 720, height: 438 },
   { id: 'schematic', tag: 'startup', caption: "Schematic and PCB layout for the hearing aid.", date: '2025-05', ratio: '4/5', src: '/archive/schematic.webp', width: 720, height: 713 },
   { id: 'desk-setup', tag: 'etc', caption: "Floating point notes and a quiet desk.", date: '2025-04', ratio: '4/5', src: '/archive/desk-setup.webp', width: 720, height: 960 },
+  { id: 'chakboot', tag: 'intelligence', caption: 'ChakBoot, an AI virtual fitting web app.', date: '2025-03', ratio: '4/5', src: '/archive/chakboot.webp', width: 720, height: 400 },
 ]

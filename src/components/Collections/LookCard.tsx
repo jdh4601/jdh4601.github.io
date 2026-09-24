@@ -27,6 +27,11 @@ export function LookCard({ look }: LookCardProps) {
           <p className="look__composition">
             <span>Composition:</span> {look.composition}
           </p>
+          {look.link && (
+            <a className="look__link" href={look.link.href} target="_blank" rel="noreferrer">
+              {look.link.label} ↗
+            </a>
+          )}
         </div>
       </div>
     </li>
