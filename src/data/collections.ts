@@ -15,16 +15,17 @@ export const LOOKS: readonly Look[] = [
   {
     number: '01',
     title: 'D.one',
-    role: 'Community builder',
+    role: 'Co-founder & Community builder',
     startedAt: '2025-10',
     line: 'An offline room for solo founders. Two locations, fifty-plus members, and a lot of late coffee in five months.',
     composition: '60% people, 25% seminars, 15% instagram reels',
     photo: { file: 'done.webp', ratio: '3/2', src: '/img/looks/done.webp' },
+    link: { label: 'Instagram', href: 'https://www.instagram.com/wearedone.kr/' },
   },
   {
     number: '02',
     title: 'Sound Bartender',
-    role: 'Product manager',
+    role: 'Co-founder & Product manager',
     startedAt: '2025-03',
     line: 'A hearing aid that mixes the room for you: separate the voice you care about, turn the rest down.',
     composition: '50% speech separation, 30% custom PCB, 20% stubbornness',
@@ -33,7 +34,7 @@ export const LOOKS: readonly Look[] = [
   {
     number: '03',
     title: 'AI Virtual Fitting',
-    role: 'Frontend engineer',
+    role: 'Team lead & Frontend engineer',
     startedAt: '2025-06',
     line: 'Scan a QR, pick an avatar, try the garment on in ten seconds. Diffusion-based fitting, shipped in three days for a campus festival.',
     composition: '70% diffusion, 20% festival crowd, 10% sleepless nights',
