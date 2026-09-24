@@ -17,7 +17,7 @@ export const LOOKS: readonly Look[] = [
     title: 'D.one',
     role: 'Co-founder & Community builder',
     startedAt: '2025-10',
-    line: 'An offline room for solo founders. Two locations, fifty-plus members, and a lot of late coffee in five months.',
+    line: 'A year of running an offline community for solo founders. Six meetups hosted, fifty-plus members, 100k views on Instagram.',
     composition: '60% people, 25% seminars, 15% instagram reels',
     photo: { file: 'done.webp', ratio: '3/2', src: '/img/looks/done.webp' },
     link: { label: 'Instagram', href: 'https://www.instagram.com/wearedone.kr/' },
