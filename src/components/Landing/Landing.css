@@ -45,7 +45,8 @@
 }
 
 .landing__tagline {
-  max-width: 34ch;
+  /* The line break lives in the data; keep it and never wrap mid-line. */
+  white-space: pre;
   margin-top: 22px;
   font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 300;
