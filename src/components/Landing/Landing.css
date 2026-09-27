@@ -236,17 +236,9 @@
     display: none;
   }
   .board-object__inner {
-    animation:
-      drop-in 0.8s var(--delay) var(--ease) both,
-      sway 5s calc(var(--delay) + 1s) ease-in-out infinite alternate;
+    animation: drop-in 0.65s var(--mobile-delay) var(--ease) both;
   }
   .landing__hint {
     display: none;
-  }
-}
-
-@keyframes sway {
-  to {
-    transform: rotate(calc(var(--rotate) + 2deg)) translateY(-3px);
   }
 }

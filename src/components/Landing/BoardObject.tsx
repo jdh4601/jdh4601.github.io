@@ -6,6 +6,7 @@ import { useDraggable } from '../../hooks/useDraggable'
 interface BoardObjectProps {
   item: BoardItem
   index: number
+  mobileIndex: number
 }
 
 function BoardObjectContent({ item }: { item: BoardItem }) {
@@ -34,7 +35,7 @@ function BoardObjectContent({ item }: { item: BoardItem }) {
   }
 }
 
-export function BoardObject({ item, index }: BoardObjectProps) {
+export function BoardObject({ item, index, mobileIndex }: BoardObjectProps) {
   const { offset, isDragging, handlers } = useDraggable()
 
   const style = {
@@ -45,6 +46,7 @@ export function BoardObject({ item, index }: BoardObjectProps) {
     width: `${item.width}px`,
     '--rotate': `${item.rotate ?? 0}deg`,
     '--delay': `${index * 45}ms`,
+    '--mobile-delay': `${350 + mobileIndex * 220}ms`,
     translate: `${offset.x}px ${offset.y}px`,
   } as CSSProperties
 

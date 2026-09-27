@@ -5,6 +5,10 @@ import { BoardObject } from './BoardObject'
 
 import './Landing.css'
 
+const MOBILE_ORDER = new Map(
+  BOARD_ITEMS.filter((item) => !item.hideOnMobile).map((item, index) => [item.id, index]),
+)
+
 export function Landing() {
   const { rect, handlers } = useMarquee()
 
@@ -12,7 +16,12 @@ export function Landing() {
     <header className="landing" id="top">
       <div className="landing__board" {...handlers}>
         {BOARD_ITEMS.map((item, index) => (
-          <BoardObject key={item.id} item={item} index={index} />
+          <BoardObject
+            key={item.id}
+            item={item}
+            index={index}
+            mobileIndex={MOBILE_ORDER.get(item.id) ?? 0}
+          />
         ))}
         {rect && <div className="landing__marquee" style={rect} />}
       </div>
