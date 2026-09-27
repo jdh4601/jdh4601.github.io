@@ -5,9 +5,16 @@ import { BoardObject } from './BoardObject'
 
 import './Landing.css'
 
-const MOBILE_ORDER = new Map(
-  BOARD_ITEMS.filter((item) => !item.hideOnMobile).map((item, index) => [item.id, index]),
-)
+const mobileIds = BOARD_ITEMS.filter((item) => !item.hideOnMobile).map((item) => item.id)
+
+for (let index = mobileIds.length - 1; index > 0; index -= 1) {
+  const randomIndex = Math.floor(Math.random() * (index + 1))
+  const currentId = mobileIds[index]
+  mobileIds[index] = mobileIds[randomIndex]
+  mobileIds[randomIndex] = currentId
+}
+
+const MOBILE_ORDER = new Map(mobileIds.map((id, index) => [id, index]))
 
 export function Landing() {
   const { rect, handlers } = useMarquee()

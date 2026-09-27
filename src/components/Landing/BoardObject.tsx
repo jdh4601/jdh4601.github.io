@@ -46,7 +46,7 @@ export function BoardObject({ item, index, mobileIndex }: BoardObjectProps) {
     width: `${item.width}px`,
     '--rotate': `${item.rotate ?? 0}deg`,
     '--delay': `${index * 45}ms`,
-    '--mobile-delay': `${350 + mobileIndex * 220}ms`,
+    '--mobile-delay': `${200 + mobileIndex * 100}ms`,
     translate: `${offset.x}px ${offset.y}px`,
   } as CSSProperties
 
